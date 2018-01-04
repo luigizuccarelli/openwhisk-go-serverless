@@ -3,6 +3,9 @@ An openwhisk go serverless function that reads and writes iot custom data to mon
 
 ## Development and Debug Tips
 
+### Install and start openwhisk on local dev
+* Refer to the openwhisk repo [ https://github.com/apache/incubator-openwhisk ]
+
 ### Download and start the mongodb docker container
 ```bash
 # I made use of the jessie 3.6 image
@@ -20,7 +23,7 @@ CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' exec.go
 
 ```
 
-### Test it locally - repeat above step until its all working
+### Test it locally - repeat the code change and build steps until its all working
 ```bash
 ./exec '{"ip": "localhost","db": "test", "action": "insert", "payload": {"channels": [1,0,0,0,0,0,0,1],"temperatures":[40.3,40.5,42.5,45.8,50.1,50.2,53.5,54.5]}}'
 
@@ -33,6 +36,8 @@ CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' exec.go
 ```bash
 docker build -t lzuccarelli/go-serverless .
 
+docker push lzuccarelli/go-serverless
+
 ```
 ### Start the serverless docker image just created
 ```bash
@@ -41,7 +46,7 @@ docker run -p 8080:8080 --link mongodb -d xxxxx "/bin/bash" "-c" "cd actionProxy
 
 ```
 
-# Test the docker image (use the invoke.py script)
+### Test the docker image (use the invoke.py script)
 ```bash
 python invoke.py init
 OK
