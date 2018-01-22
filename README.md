@@ -1,5 +1,5 @@
 # openwhisk-go-serverless
-An openwhisk go serverless function that reads and writes iot custom data to mongodb
+An openwhisk go serverless function that reads and writes iot custom data from/to mongodb
 
 ## Development and Debug Tips
 
