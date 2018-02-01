@@ -19,7 +19,11 @@ docker run --name mongodb -p 27017:27017 -v /tmp/data:/data/db -d mongo:3.6.0-je
 
 ```bash
 # build go executable ensure libraries are statically linked (if not an error /action/exec can't be found)
+# For Linux:
 CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' exec.go
+
+# For Mac:
+CGO_ENABLED=0 GOOS=darwin go build -a -ldflags '-extldflags "-static"' exec.go
 
 ```
 
